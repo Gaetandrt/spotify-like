@@ -1,0 +1,6 @@
+{
+  "name" : "supabase",
+  "devDependencies": {
+    "supabase": "^1.131.5"
+  }
+}
