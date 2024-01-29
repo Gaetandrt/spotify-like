@@ -15,6 +15,17 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addBase, config }: { addBase: any, config: any }) {
+      addBase({
+        '::-webkit-scrollbar': {
+          display: 'none',
+        },
+        'body': {
+          scrollbarWidth: 'none',
+        },
+      })
+    },
+  ],
 };
 export default config;

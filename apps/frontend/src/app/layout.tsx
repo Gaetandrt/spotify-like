@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/navbar/Navbar";
 import Providers from "@/providers/Providers";
+import Modal from "@/components/modal/CreatePlaylist";
+import ProfilePopup from "@/components/navbar/ProfilePopup";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
 
@@ -18,10 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={poppins.className}>
+      <body className={poppins.className + " overflow-hidden"}>
         <Providers>
-          <Navbar />
-          {children}
+          <Navbar>
+            {children}
+            <Modal />
+          </Navbar>
         </Providers>
       </body>
     </html>

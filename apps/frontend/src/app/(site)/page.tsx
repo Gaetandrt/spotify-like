@@ -1,11 +1,26 @@
-import Image from "next/image";
+import HomeList from "@/components/homeList/HomeList";
+import Modal from "@/components/modal/CreatePlaylist";
+
+type SearchParamProps = {
+  searchParams: Record<string, string> | null | undefined;
+};
 
 export default function Home() {
+
+
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-24">
+    <div className="flex min-h-screen flex-col gap-16">
       <div>
-        testt
+        <HomeList
+          title="Dernières écoutes"
+        >
+        </HomeList>
       </div>
+      {/* <div>
+        <HomeList title="Playlists" description="Vos playlists">
+        </HomeList>
+      </div> */}
     </div>
   );
 }
