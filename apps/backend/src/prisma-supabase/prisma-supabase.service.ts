@@ -1,7 +1,7 @@
 // prisma-supabase.service.ts
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { PrismaClient } from '@prisma/next_auth';
+import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class PrismaSupabaseService extends PrismaClient {
