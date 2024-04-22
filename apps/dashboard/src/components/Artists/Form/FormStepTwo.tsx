@@ -8,9 +8,9 @@ import { UseFormRegisterReturn, UseFormReturn } from 'react-hook-form';
 type FormStepTwoProps = {
   form: UseFormReturn<{
     username: string;
-    FirstName: string;
-    LastName: string;
-    Email: string;
+    firstname: string;
+    lastname: string;
+    email: string;
     Image: File;
 }, any, undefined>
   handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void

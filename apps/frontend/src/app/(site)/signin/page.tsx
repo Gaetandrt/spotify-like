@@ -6,7 +6,7 @@ import React, { useState } from "react";
 type SigninProps = {};
 
 function signinPage({}: SigninProps) {
-  const [email, setEmail] = useState("");
+  const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
 
   const onSubmit = () => {
@@ -23,10 +23,10 @@ function signinPage({}: SigninProps) {
                 <p className="font-medium text-4xl">MUSIC</p>
             </div>
             <div>
-                <p className="font-medium text-2xl">EMAIL</p>
+                <p className="font-medium text-2xl">email</p>
             </div>
             <div>
-                <SignInput onChange={setEmail} />
+                <SignInput onChange={setemail} />
             </div>
             <div>
                 <p className="font-medium text-2xl">PASSWORD</p>

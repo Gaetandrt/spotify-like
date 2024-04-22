@@ -8,9 +8,9 @@ import { UseFormReturn } from 'react-hook-form'
 type FormStepOneProps = {
   form: UseFormReturn<{
     username: string;
-    FirstName: string;
-    LastName: string;
-    Email: string;
+    firstname: string;
+    lastname: string;
+    email: string;
     Image: File;
 }, any, undefined>
   nextStep: () => void
@@ -26,7 +26,7 @@ function FormStepOne({ form, nextStep }: FormStepOneProps) {
           <FormItem>
             <FormLabel>{i18n.t("CreateArtistModal." + field.name)}</FormLabel>
             <FormControl>
-              <Input placeholder="Kaarism" {...field} />
+              <Input placeholder="Jul" {...field} />
             </FormControl>
             <FormDescription>
               {i18n.t("CreateArtistModal.ArtistUsernameFormDescr")}
@@ -37,15 +37,15 @@ function FormStepOne({ form, nextStep }: FormStepOneProps) {
       />
       <FormField
         control={form.control}
-        name="FirstName"
+        name="firstname"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{field.name}</FormLabel>
+            <FormLabel>{i18n.t("CreateArtistModal." + field.name)}</FormLabel>
             <FormControl>
-              <Input placeholder="Franck" {...field} />
+              <Input placeholder="Julien" {...field} />
             </FormControl>
             <FormDescription>
-              This is the first name of the artist.
+              {i18n.t("CreateArtistModal.ArtistFirstnameFormDescr")}
             </FormDescription>
             <FormMessage />
           </FormItem>
@@ -53,15 +53,15 @@ function FormStepOne({ form, nextStep }: FormStepOneProps) {
       />
       <FormField
         control={form.control}
-        name="LastName"
+        name="lastname"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{field.name}</FormLabel>
+            <FormLabel>{i18n.t("CreateArtistModal." + field.name)}</FormLabel>
             <FormControl>
-              <Input placeholder="Dubosque" {...field} />
+              <Input placeholder="Mari" {...field} />
             </FormControl>
             <FormDescription>
-              This is the last name of the artist.
+              {i18n.t("CreateArtistModal.ArtistLastnameFormDescr")}
             </FormDescription>
             <FormMessage />
           </FormItem>
@@ -69,15 +69,15 @@ function FormStepOne({ form, nextStep }: FormStepOneProps) {
       />
       <FormField
         control={form.control}
-        name="Email"
+        name="email"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{field.name}</FormLabel>
+            <FormLabel>{i18n.t("CreateArtistModal." + field.name)}</FormLabel>
             <FormControl>
-              <Input placeholder="email@email.com" {...field} />
+              <Input placeholder="majolie@oretplatine.dp" {...field} />
             </FormControl>
             <FormDescription>
-              This is the email of the artist.
+              {i18n.t("CreateArtistModal.ArtistEmailFormDescr")}
             </FormDescription>
             <FormMessage />
           </FormItem>

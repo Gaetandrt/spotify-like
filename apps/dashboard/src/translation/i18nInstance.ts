@@ -14,6 +14,6 @@ let i18n = new I18n({
 i18n.store(frFR)
 i18n.store(enEN)
 
-i18n.locale = "en"
+i18n.locale = "fr"
 
 export default i18n;

@@ -2,8 +2,8 @@ export class GoogleLoginUserDto {
     providerAccountId: string;
     email: string;
     email_verified: string;
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    lastname: string;
     picture: string;
     accessToken: string;
     refreshToken: string;

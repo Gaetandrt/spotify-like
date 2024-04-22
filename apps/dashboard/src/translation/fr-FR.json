@@ -2,8 +2,25 @@
   "fr": {
     "CreateArtistModal" : {
       "username": "Nom d'utilisateur",
+      "firstname": "Prénom",
+      "lastname": "Nom",
+      "email": "Email",
+      "UsernameZodMin": "Le nom d'utilisateur doit faire minimum 2 caractères.",
+      "UsernameZodMax": "Le nom d'utilisateur doit faire maximum 20 caractères.",
+      "firstnameZodMin": "Le prénom doit faire minimum 2 caractères.",
+      "firstnameZodMax": "Le prénom d'utilisateur doit faire maximum 20 caractères.",
+      "emailZodMax": "L'email doit faire maximum 50 caractères.",
+      "emailInvalidZod": "L'email n'est pas valide.",
+      "lastnameZodMin": "Le nom doit faire minimum 2 caractères.",
+      "lastnameZodMax": "Le nom doit faire maximum 20 caractères.",
+      "ImageSizeZod": "L'image doit faire maximum 100MB.",
+      "ImageTypeZod": "Les types d'images acceptés sont: .jpg, .jpeg, .png, et .webp.",
+      "NoImageZod": "Vous devez ajouter une image.",
       "UniqueConstraintFailed": "Ce %{field} est déjà utilisé. Veuillez en choisir un autre.",
       "ArtistUsernameFormDescr": "Ceci sera le nom d'utilisateur publique de l'artiste.",
+      "ArtistFirstnameFormDescr": "Le prénom de l'artiste.",
+      "ArtistLastnameFormDescr": "Le nom de famille de l'artiste.",
+      "ArtistEmailFormDescr": "L'email de l'artiste.",
       "CreateNewArtist": "Créer un nouvel artiste",
       "CreateNewArtistDescr": "Vous pouvez créé un artiste ici. Cliquez sur terminer quand vous avez fini."
     }

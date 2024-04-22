@@ -1,11 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form } from "@/components/ui/form"
 import { z } from "zod"
-import { UseFormReturn, useForm } from "react-hook-form"
+import { FieldErrors, UseFormReturn, useForm } from "react-hook-form"
 import FormStepOne from "./FormStepOne"
 import FormStepTwo from "./FormStepTwo"
 import { formSchema } from "./FormSchema"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { createNewArtist, uploadArtistImage } from "@/services/ArtistsService"
 import { useToast } from "@/components/ui/use-toast"
 import { Artist } from "@/types/Artist"
@@ -19,9 +19,9 @@ type ProfileFormProps = {
 
 const handleFormError = (error: ErrorResponse, form: UseFormReturn<{
   username: string;
-  FirstName: string;
-  LastName: string;
-  Email: string;
+  firstname: string;
+  lastname: string;
+  email: string;
   Image: File;
 }, any, undefined>, setActiveStep: React.Dispatch<React.SetStateAction<number>>) => {
   error.details?.fields && Object.entries(error.details.fields).forEach(([key, value]) => {
@@ -46,16 +46,13 @@ export function ArtistForm({ setOpen, editArtist }: ProfileFormProps) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: editArtist?.username || "",
-      FirstName: editArtist?.first_name || "",
-      LastName: editArtist?.last_name || "",
-      Email: editArtist?.email || "",
+      firstname: editArtist?.first_name || "",
+      lastname: editArtist?.last_name || "",
+      email: editArtist?.email || "",
       Image: undefined,
     },
   })
-
-  useEffect(() => {
-    console.log(editArtist)
-  }, [])
+  const fileRef = form.register("Image");
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -73,7 +70,6 @@ export function ArtistForm({ setOpen, editArtist }: ProfileFormProps) {
   };
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-
     const response = await uploadArtistImage(values.Image, values.username);
 
     const data = await createNewArtist(values, response.id);
@@ -90,11 +86,21 @@ export function ArtistForm({ setOpen, editArtist }: ProfileFormProps) {
     })
   }
 
-  const fileRef = form.register("Image");
+  async function onInvalid(error: FieldErrors<FormData>): Promise<void> {
+    if (error) {
+      Object.entries(error).forEach(([key, value]) => {
+        if (key !== "Image") {
+          setActiveStep(1)
+        } else {
+          setActiveStep(2)
+        }
+      });
+    }
+  }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit, onInvalid)} className="space-y-8">
         {activeStep === 1 &&
           <FormStepOne
             form={form}

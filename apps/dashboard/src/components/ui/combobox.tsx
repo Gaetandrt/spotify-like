@@ -30,19 +30,19 @@ type ComboBoxProps = {
   form: UseFormReturn<{
     Artist: string;
     Title: string;
-    LastName: string;
-    Email: string;
+    lastname: string;
+    email: string;
   }, any, {
     Artist: string;
     Title: string;
-    LastName: string;
-    Email: string;
+    lastname: string;
+    email: string;
   }>
   field: ControllerRenderProps<{
     Artist: string;
     Title: string;
-    LastName: string;
-    Email: string;
+    lastname: string;
+    email: string;
 }, "Artist">
 }
 

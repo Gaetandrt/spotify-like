@@ -2,8 +2,25 @@
   "en": {
     "CreateArtistModal": {
       "username": "Username",
+      "firstname": "First Name",
+      "lastname": "Last Name",
+      "email": "Email",
+      "UsernameZodMin": "Username must be at least 2 characters.",
+      "UsernameZodMax": "Username must be at most 20 characters.",
+      "firstnameZodMin": "First name must be at least 2 characters.",
+      "firstnameZodMax": "First name must be at most 20 characters.",
+      "emailZodMax": "email must be at most 50 characters.",
+      "emailInvalidZod": "email must be a valid email.",
+      "lastnameZodMin": "Last name must be at least 2 characters.",
+      "lastnameZodMax": "Last name must be at most 20 characters.",
+      "ImageSizeZod": "File size should be less than 100MB.",
+      "ImageTypeZod": "Only these types are allowed .jpg, .jpeg, .png, .webp and mp4.",
+      "NoImageZod": "Please upload an image.",
       "UniqueConstraintFailed": "This %{field} is already taken. Please choose another one.",
       "ArtistUsernameFormDescr": "This will be the public username of the artist.",
+      "ArtistFirstnameFormDescr": "This will be the first name of the artist.",
+      "ArtistLastnameFormDescr": "This will be the last name of the artist.",
+      "ArtistEmailFormDescr": "This will be the email of the artist.",
       "CreateNewArtist": "Create New Artist",
       "CreateNewArtistDescr": "You can create a new artist here. Click submit when you're done."
     }

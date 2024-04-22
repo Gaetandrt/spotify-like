@@ -28,10 +28,10 @@ const formSchema = z.object({
   Title: z.string().min(1, {
     message: "You must choose a title.",
   }),
-  LastName: z.string().min(2, {
+  lastname: z.string().min(2, {
     message: "Last name must be at least 2 characters.",
   }),
-  Email: z.string().email({
+  email: z.string().email({
     message: "Please enter a valid email.",
   }),
   Track: fileSchema,

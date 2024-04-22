@@ -27,9 +27,9 @@ export async function createNewArtist(values: z.infer<typeof formSchema>, image:
   try {
     const response = await fetcher<Artist>("/artists", "post", {
       username: values.username,
-      first_name: values.FirstName,
-      last_name: values.LastName,
-      email: values.Email,
+      first_name: values.firstname,
+      last_name: values.lastname,
+      email: values.email,
       image_id: image,
     });
 

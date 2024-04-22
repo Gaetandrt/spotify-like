@@ -18,8 +18,8 @@ export class AuthService {
     }
 
     const {
-      firstName,
-      lastName,
+      firstname,
+      lastname,
       email,
       email_verified,
       expires_in,
@@ -38,7 +38,7 @@ export class AuthService {
     if (!userData) {
       const newUserData = await this.prisma.users.create({
         data: {
-          name: `${firstName} ${lastName}`,
+          name: `${firstname} ${lastname}`,
           email: email,
           emailVerified: email_verified ? new Date().toISOString() : null,
           image: picture,
