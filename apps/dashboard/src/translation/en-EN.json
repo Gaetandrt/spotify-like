@@ -1,0 +1,11 @@
+{
+  "en": {
+    "CreateArtistModal": {
+      "username": "Username",
+      "UniqueConstraintFailed": "This %{field} is already taken. Please choose another one.",
+      "ArtistUsernameFormDescr": "This will be the public username of the artist.",
+      "CreateNewArtist": "Create New Artist",
+      "CreateNewArtistDescr": "You can create a new artist here. Click submit when you're done."
+    }
+  }
+}

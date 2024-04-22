@@ -1,31 +1,33 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { ProfileForm } from "./Form/FormCreate"
+import { ArtistForm } from "./Form/FormCreate"
+import { useState } from "react";
+import i18n from "@/translation/i18nInstance";
 
-export function TrackDialogCreate() {
+export function ArtistDialogCreate() {
+  const [open, setOpen] = useState(false);
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-      <Button variant="outline">Create new artist</Button>
+      <Button variant="outline">{i18n.t("CreateArtistModal.CreateNewArtist")}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>New artist</DialogTitle>
+          <DialogTitle>{i18n.t("CreateArtistModal.CreateNewArtist")}</DialogTitle>
           <DialogDescription>
-            You can create a new artist here. Click submit when you're done.
+            {i18n.t("CreateArtistModal.CreateNewArtistDescr")}
           </DialogDescription>
         </DialogHeader>
-        <ProfileForm />
+        <ArtistForm setOpen={setOpen}/>
       </DialogContent>
     </Dialog>
   )

@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { TrackForm } from "./FromCreate"
+import { TrackForm } from "./Form/FromCreate"
 
 export function TrackDialogCreate() {
   return (

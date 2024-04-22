@@ -4,7 +4,7 @@ const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const ACCEPTED_IMAGE_MIME_TYPES = ["image/jpeg", "image/png", "image/jpg"];
 
 export const formSchema = z.object({
-  Username: z.string().min(2, {
+  username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
   FirstName: z.string().min(2, {

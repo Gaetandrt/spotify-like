@@ -11,6 +11,7 @@ import { Public } from 'src/decorators/public.decorator';
 export class ArtistsController {
   constructor(private readonly artistsService: ArtistsService) { }
 
+  @Public()
   @Post()
   create(@Body() createArtistDto: artist) {
     return this.artistsService.create(createArtistDto);
@@ -28,13 +29,22 @@ export class ArtistsController {
         ],
       }),
     )
-    file?: Express.Multer.File,
+    file: Express.Multer.File,
+    @Body('filename') filename: string,
   ) {
-    return this.artistsService.uploadFile(file, "test");
+    return this.artistsService.uploadFile(file, filename);
   }
+
+  @Public()
   @Get()
   findAll() {
     return this.artistsService.findAll();
+  }
+
+  @Public()
+  @Get('autocomplete')
+  findAllAutocomplete() {
+    return this.artistsService.findAllAutocomplete();
   }
 
   @Get(':id')

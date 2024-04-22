@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -7,10 +9,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { ProfileForm } from "./Form/FormCreate"
+import { ArtistForm } from "./Form/FormCreate"
 import { Pencil } from "lucide-react"
+import { useState } from "react";
+import { Artist } from "@/types/Artist"
 
-export function TrackDialogEdit() {
+type ArtistDialogEditProps = {
+  data: Artist
+}
+
+export function ArtistDialogEdit({ data }: ArtistDialogEditProps) {
+  const [open, setOpen] = useState(false);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -25,7 +35,7 @@ export function TrackDialogEdit() {
             You can edit the artist here. Click submit when you're done.
           </DialogDescription>
         </DialogHeader>
-        <ProfileForm />
+        <ArtistForm setOpen={setOpen} editArtist={data}/>
       </DialogContent>
     </Dialog>
   )

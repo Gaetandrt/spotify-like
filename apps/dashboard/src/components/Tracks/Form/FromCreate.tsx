@@ -1,17 +1,18 @@
-"use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form } from "@/components/ui/form"
 import { z } from "zod"
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
-import { Input } from "../ui/input"
-import { Button } from "../ui/button"
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../../ui/form"
+import { Input } from "../../ui/input"
+import { Button } from "../../ui/button"
 import { useForm } from "react-hook-form"
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
+import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover"
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons"
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "../ui/command"
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "../../ui/command"
 import { cn } from "@/lib/utils"
 import { TrackEdit } from "@/types/Track"
+import { fetchAutcompleteArtists } from "@/services/ArtistsService"
+import { useEffect } from "react"
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
@@ -40,7 +41,18 @@ type TrackFormProps = {
   editTrack?: TrackEdit
 }
 
-export function TrackForm({ editTrack }: TrackFormProps) {
+async function getData() {
+  const data = await fetchAutcompleteArtists();
+
+  if (!data) {
+    return [];
+  }
+
+  return data;
+}
+
+
+export async function TrackForm({ editTrack }: TrackFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -53,13 +65,12 @@ export function TrackForm({ editTrack }: TrackFormProps) {
     console.log(values)
   }
 
-  const data = [
-    { value: "1", label: "Kanye West" },
-    { value: "2", label: "Drake" },
-    { value: "3", label: "Kendrick Lamar" },
-    { value: "4", label: "J. Cole" },
-    { value: "5", label: "Travis Scott" },
-  ]
+
+  const data = await fetchAutcompleteArtists()
+
+  useEffect(() => {
+
+  }, [])
 
   return (
     <Form {...form}>

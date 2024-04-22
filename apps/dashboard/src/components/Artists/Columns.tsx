@@ -1,31 +1,23 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { Pencil, Trash } from "lucide-react";
-import Image from "next/image";
+import { Trash } from "lucide-react";
 import { Button } from "../ui/button";
-import { TrackDialogEdit } from "./DialogEdit";
-
-export type Artist = {
-  id: string;
-  created_at: Date;
-  image: string;
-  name: string;
-  // album: Album[];
-  // objects: Objects;
-  // track: Track[];
-};
+import { ArtistDialogEdit } from "./DialogEdit";
+import { Artist } from "@/types/Artist";
+import ImageWithFallback from "../Image/ImageWithFallback";
 
 export const columns: ColumnDef<Artist>[] = [
   {
-    accessorKey: "image",
+    accessorKey: "image_url",
     header: "Picture",
+    size: 25,
     cell: ({ cell }) => (
-      <Image src={cell.getValue() as string} alt="Artist" width={35} height={35} />
+      <ImageWithFallback src={cell.getValue() as string} alt="Artist" width={35} height={35} fallbackSrc="/spotify-logo.svg" />
     ),
   },
   {
-    accessorKey: "name",
+    accessorKey: "username",
     header: "Name",
 
   },
@@ -40,13 +32,17 @@ export const columns: ColumnDef<Artist>[] = [
   {
     id: "actions",
     header: "Actions",
-    cell: ({ row }) => (
-      <div className="flex gap-3">
-        <TrackDialogEdit />
-        <Button variant="outline" size={"icon"}>
-          <Trash size={16} />
-        </Button>
-      </div>
-    ),
+    cell: ({ row }) => {
+      const artist = row.original
+
+      return (
+        <div className="flex gap-3">
+          <ArtistDialogEdit data={artist} />
+          <Button variant="outline" size={"icon"}>
+            <Trash size={16} />
+          </Button>
+        </div>
+      )
+    }
   },
 ]

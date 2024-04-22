@@ -1,23 +1,18 @@
 import { Button } from '@/components/ui/button'
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import i18n from '@/translation/i18nInstance'
 import React from 'react'
 import { UseFormReturn } from 'react-hook-form'
 
 type FormStepOneProps = {
   form: UseFormReturn<{
-    Username: string;
+    username: string;
     FirstName: string;
     LastName: string;
     Email: string;
     Image: File;
-  }, any, {
-    Username: string;
-    FirstName: string;
-    LastName: string;
-    Email: string;
-    Image: File;
-  }>
+}, any, undefined>
   nextStep: () => void
 }
 
@@ -26,15 +21,15 @@ function FormStepOne({ form, nextStep }: FormStepOneProps) {
     <>
       <FormField
         control={form.control}
-        name="Username"
+        name="username"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{field.name}</FormLabel>
+            <FormLabel>{i18n.t("CreateArtistModal." + field.name)}</FormLabel>
             <FormControl>
               <Input placeholder="Kaarism" {...field} />
             </FormControl>
             <FormDescription>
-              This is the public display name.
+              {i18n.t("CreateArtistModal.ArtistUsernameFormDescr")}
             </FormDescription>
             <FormMessage />
           </FormItem>

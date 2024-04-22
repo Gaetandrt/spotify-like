@@ -18,7 +18,7 @@ export interface TrackEdit {
   image: string;
 }
 
-export interface TrackCreate {
+export interface ICreateTrackDto {
   artist_id: string;
   title: string;
   source: string;

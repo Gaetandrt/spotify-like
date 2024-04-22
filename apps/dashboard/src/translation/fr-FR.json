@@ -1,0 +1,11 @@
+{
+  "fr": {
+    "CreateArtistModal" : {
+      "username": "Nom d'utilisateur",
+      "UniqueConstraintFailed": "Ce %{field} est déjà utilisé. Veuillez en choisir un autre.",
+      "ArtistUsernameFormDescr": "Ceci sera le nom d'utilisateur publique de l'artiste.",
+      "CreateNewArtist": "Créer un nouvel artiste",
+      "CreateNewArtistDescr": "Vous pouvez créé un artiste ici. Cliquez sur terminer quand vous avez fini."
+    }
+  }
+}
