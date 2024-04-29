@@ -1,6 +1,8 @@
+import ImageWithFallback from '@/components/Image/ImageWithFallback';
 import { Button } from '@/components/ui/button';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import i18n from '@/translation/i18nInstance';
 import Image from 'next/image';
 import React, { useState } from 'react'
 import { UseFormRegisterReturn, UseFormReturn } from 'react-hook-form';
@@ -12,7 +14,7 @@ type FormStepTwoProps = {
     lastname: string;
     email: string;
     Image: File;
-}, any, undefined>
+  }, any, undefined>
   handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   previewUrl: string | null
   previousStep: () => void
@@ -38,14 +40,11 @@ function FormStepTwo({ form, previousStep, handleImageChange, previewUrl, fileRe
         }}
       />
       <div>
-        {previewUrl && <Image src={previewUrl} width="0"
-          height="0"
-          sizes="100vw"
-          style={{ width: '100%', height: 'auto' }} alt="Image preview" />}
+        {previewUrl && <ImageWithFallback src={previewUrl} fallbackSrc="/spotify-logo.svg" alt="Image preview" width={400} height={400} />}
       </div>
       <div className='w-full flex justify-between'>
-        <Button onClick={previousStep}>Previous</Button>
-        <Button type='submit'>Submit</Button>
+        <Button onClick={previousStep}>{i18n.t("Previous")}</Button>
+        <Button type='submit'>{i18n.t("Submit")}</Button>
       </div>
     </>
   )

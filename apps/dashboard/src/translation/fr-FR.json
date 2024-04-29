@@ -1,5 +1,9 @@
 {
   "fr": {
+    "Error": {
+      "InvalidInputData": "Merci de vérifié les informations soumises.",
+      "UniqueConstraintFailed": "Un champ saisie est déjà utilisé."
+    },
     "CreateArtistModal" : {
       "username": "Nom d'utilisateur",
       "firstname": "Prénom",
@@ -22,7 +26,26 @@
       "ArtistLastnameFormDescr": "Le nom de famille de l'artiste.",
       "ArtistEmailFormDescr": "L'email de l'artiste.",
       "CreateNewArtist": "Créer un nouvel artiste",
-      "CreateNewArtistDescr": "Vous pouvez créé un artiste ici. Cliquez sur terminer quand vous avez fini."
-    }
+      "CreateNewArtistDescr": "Vous pouvez créé un artiste ici. Cliquez sur terminer quand vous avez fini.",
+      "ArtistSuccess": "Artiste créé avec succès !"
+    },
+    "ArtistDataGrid" : {
+      "Artist": "Artiste",
+      "Username": "Nom d'utilisateur",
+      "Firstname": "Prénom",
+      "Lastname": "Nom",
+      "Email": "Email",
+      "Actions": "Actions",
+      "Edit": "Modifier",
+      "Delete": "Supprimer",
+      "NoArtists": "Aucun artiste trouvé.",
+      "Picture": "Image",
+      "CreatedAt": "Créé le"
+    },
+    "Next": "Suivant",
+    "Submit": "Terminer",
+    "Previous": "Précedent",
+    "Edit": "Modifier",
+    "Delete": "Supprimer"
   }
 }

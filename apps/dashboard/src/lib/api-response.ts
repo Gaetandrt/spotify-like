@@ -22,7 +22,7 @@ export interface FieldError {
   target: string;
 }
 
-export interface UploadResponse {
+export interface UploadData {
   path: string;
   id: string;
   fullPath: string;

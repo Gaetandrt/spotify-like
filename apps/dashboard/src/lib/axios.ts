@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ApiResponse, SuccessResponse, ErrorResponse } from './api-response';
+import { headers } from 'next/headers';
 
 const axiosAPI = axios.create({
   baseURL: 'http://localhost:3001',
@@ -25,14 +26,15 @@ function handleError(error: any): ErrorResponse {
   };
 }
 
-export async function fetcher<T>(url: string, method: 'get' | 'post' | 'put' | 'delete' | 'patch', data?: any): Promise<ApiResponse<T>> {
-  const config = {
+export async function fetcher<T>(url: string, method: 'get' | 'post' | 'put' | 'delete' | 'patch', data?: any, config?: any): Promise<ApiResponse<T>> {
+  const configExtra = {
     method: method,
     url: url,
     data: data,
+    ...config
   };
 
-  return axiosAPI(config)
+  return axiosAPI(configExtra)
     .then(response => handleResponse<T>(response))
     .catch(error => handleError(error));
 }

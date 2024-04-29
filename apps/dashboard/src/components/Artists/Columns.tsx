@@ -6,11 +6,12 @@ import { Button } from "../ui/button";
 import { ArtistDialogEdit } from "./DialogEdit";
 import { Artist } from "@/types/Artist";
 import ImageWithFallback from "../Image/ImageWithFallback";
+import i18n from "@/translation/i18nInstance";
 
 export const columns: ColumnDef<Artist>[] = [
   {
     accessorKey: "image_url",
-    header: "Picture",
+    header: i18n.t("ArtistDataGrid.Picture"),
     size: 25,
     cell: ({ cell }) => (
       <ImageWithFallback src={cell.getValue() as string} alt="Artist" width={35} height={35} fallbackSrc="/spotify-logo.svg" />
@@ -18,12 +19,12 @@ export const columns: ColumnDef<Artist>[] = [
   },
   {
     accessorKey: "username",
-    header: "Name",
+    header: i18n.t("ArtistDataGrid.Username"),
 
   },
   {
     accessorKey: "created_at",
-    header: "Created At",
+    header: i18n.t("ArtistDataGrid.CreatedAt"),
   },
   {
     accessorKey: "id",

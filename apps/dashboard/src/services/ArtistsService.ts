@@ -3,21 +3,25 @@ import { formSchema } from "@/components/Artists/Form/FormSchema";
 import axiosAPI, { fetcher } from "@/lib/axios";
 import { z } from "zod";
 import { AutocompleteData } from "@/types/Utils";
-import { ApiResponse, UploadResponse } from "@/lib/api-response";
+import { ApiResponse, UploadData } from "@/lib/api-response";
 
-export async function uploadArtistImage(file: File, filename: string): Promise<UploadResponse> {
+export async function uploadArtistImage(file: File, filename: string): Promise<ApiResponse<UploadData>> {
   try {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("filename", filename);
 
-    const response = await axiosAPI.post<UploadResponse>("/artists/upload", formData, {
+    const response = await fetcher<UploadData>("/artists/upload", "post", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
 
-    return response.data;
+
+    if (response.status === "error" )
+      throw new Error("Error uploading image")
+
+    return response;
   } catch (error) {
     throw new Error("Error uploading image");
   }
@@ -25,6 +29,7 @@ export async function uploadArtistImage(file: File, filename: string): Promise<U
 
 export async function createNewArtist(values: z.infer<typeof formSchema>, image: string): Promise<ApiResponse<Artist>> {
   try {
+    console.log(image)
     const response = await fetcher<Artist>("/artists", "post", {
       username: values.username,
       first_name: values.firstname,

@@ -1,16 +1,17 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form } from "@/components/ui/form"
-import { z } from "zod"
+import { set, z } from "zod"
 import { FieldErrors, UseFormReturn, useForm } from "react-hook-form"
 import FormStepOne from "./FormStepOne"
 import FormStepTwo from "./FormStepTwo"
 import { formSchema } from "./FormSchema"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { createNewArtist, uploadArtistImage } from "@/services/ArtistsService"
 import { useToast } from "@/components/ui/use-toast"
 import { Artist } from "@/types/Artist"
 import { ErrorResponse } from "@/lib/api-response"
 import i18n from "@/translation/i18nInstance"
+import { loadImage } from "@/lib/utils"
 
 type ProfileFormProps = {
   setOpen: (open: boolean) => void;
@@ -27,12 +28,12 @@ const handleFormError = (error: ErrorResponse, form: UseFormReturn<{
   error.details?.fields && Object.entries(error.details.fields).forEach(([key, value]) => {
     form.setError(key as keyof typeof formSchema.shape, {
       type: "server",
-      message: i18n.t("CreateArtistModal." + value.code, { field: i18n.t(value.target).toLowerCase() }),
+      message: i18n.t("CreateArtistModal." + value.code, { field: i18n.t("CreateArtistModal." + value.target).toLowerCase() }),
     });
-    if (key !== "Image") {
-      setActiveStep(1)
-    } else {
+    if (key === "Image") {
       setActiveStep(2)
+    } else {
+      setActiveStep(1)
     }
   });
 }
@@ -54,6 +55,15 @@ export function ArtistForm({ setOpen, editArtist }: ProfileFormProps) {
   })
   const fileRef = form.register("Image");
 
+  useEffect(() => {
+    if (editArtist?.image_url) {
+      loadImage(editArtist.image_url).then((file) => {
+        setImage(file);
+        setPreviewUrl(editArtist.image_url);
+      });
+    }
+  }, [editArtist?.image_url, form]);
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     setImage(file || null);
@@ -72,17 +82,32 @@ export function ArtistForm({ setOpen, editArtist }: ProfileFormProps) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const response = await uploadArtistImage(values.Image, values.username);
 
-    const data = await createNewArtist(values, response.id);
+    if (response.status === "error") {
+      toast({
+        className: "bg-red-500 text-white",
+        variant: "destructive",
+        description: i18n.t('Error.' + response.errorCode),
+      })
+      return;
+    }
+
+    const data = await createNewArtist(values, response.data.id);
 
     if (data.status === "error") {
       handleFormError(data, form, setActiveStep);
+      toast({
+        className: "bg-red-500 text-white",
+        variant: "destructive",
+        description: i18n.t('Error.' + data.errorCode),
+      })
       return;
     }
+
     setOpen(false);
     toast({
       className: "bg-green-500 text-white",
       variant: "default",
-      description: "Your message has been sent.",
+      description: i18n.t("CreateArtistModal." + "ArtistSuccess"),
     })
   }
 

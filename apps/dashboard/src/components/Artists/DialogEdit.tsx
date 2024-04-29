@@ -13,6 +13,8 @@ import { ArtistForm } from "./Form/FormCreate"
 import { Pencil } from "lucide-react"
 import { useState } from "react";
 import { Artist } from "@/types/Artist"
+import i18n from "@/translation/i18nInstance"
+import ButtonToolTip from "../ui/button-tooltip"
 
 type ArtistDialogEditProps = {
   data: Artist
@@ -23,11 +25,11 @@ export function ArtistDialogEdit({ data }: ArtistDialogEditProps) {
 
   return (
     <Dialog>
+        <ButtonToolTip toolText={i18n.t("Edit")} variant="outline" size="icon" onClick={() => setOpen(true)}>
       <DialogTrigger asChild>
-      <Button variant="outline" size={"icon"}>
           <Pencil size={16} />
-      </Button>
       </DialogTrigger>
+        </ButtonToolTip>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Edit artist</DialogTitle>
@@ -35,7 +37,7 @@ export function ArtistDialogEdit({ data }: ArtistDialogEditProps) {
             You can edit the artist here. Click submit when you're done.
           </DialogDescription>
         </DialogHeader>
-        <ArtistForm setOpen={setOpen} editArtist={data}/>
+        <ArtistForm setOpen={setOpen} editArtist={data} />
       </DialogContent>
     </Dialog>
   )

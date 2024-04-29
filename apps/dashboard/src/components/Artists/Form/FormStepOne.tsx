@@ -84,7 +84,7 @@ function FormStepOne({ form, nextStep }: FormStepOneProps) {
         )}
       />
       <div className='w-full flex justify-end'>
-        <Button type="button" onClick={nextStep}>Next</Button>
+        <Button type="button" onClick={nextStep}>{i18n.t("Next")}</Button>
       </div>
     </>
   )

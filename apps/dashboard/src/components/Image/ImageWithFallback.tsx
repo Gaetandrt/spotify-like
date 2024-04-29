@@ -15,7 +15,6 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({ src, alt, width, 
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-
     fetch(src)
       .then((res) => {
         new Promise((resolve) => setTimeout(resolve, 5000))
