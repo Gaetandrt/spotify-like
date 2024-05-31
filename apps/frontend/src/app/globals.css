@@ -6,6 +6,9 @@
   --foreground-rgb: 255,255,255;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --slider: 0, 0%, 100%;
+  --slider-foreground: 0, 0%, 0%;
+  --radius: 0.75rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -13,6 +16,11 @@
     --foreground-rgb: 255, 255, 255;
     --background-rgb: 18, 18, 18;
   }
+}
+
+h1 {
+  font-size: 1.3rem;
+  font-weight: 900;
 }
 
 body {

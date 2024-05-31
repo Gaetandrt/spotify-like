@@ -3,7 +3,8 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { PrismaClient, artist } from '@prisma/client'
 import { UpdateArtistDto } from './dto/update-artist.dto';
 import { getDownloadUrl } from 'src/utils/get.download.url';
-import { AutcompleteData } from 'src/types/_utils';
+import { AutcompleteData, PaginatedResponse, PaginationDto } from 'src/types/_utils';
+import { paginatedFindAll } from 'src/utils/paginationAll';
 
 const prisma = new PrismaClient();
 
@@ -27,7 +28,7 @@ export class ArtistsService {
     }
   }
 
-  async uploadFile(file: Express.Multer.File, filename: string) {
+  async uploadFile(file: Express.Multer.File, filename: string): Promise<PaginatedResponse<string>> {
     try {
       const { data, error } = await this.supabaseClient.storage.from('artists_pp').upload(filename + "_pp", file.buffer, {
         cacheControl: '3600',
@@ -35,23 +36,30 @@ export class ArtistsService {
         contentType: file.mimetype,
       });
 
-      return data
+      if (error)
+      throw error
+
+      return { data: data.path, metaData: {pageIndex: 1, pageSize: 1, totalItems: 1, totalPages: 1} }
     } catch (error) {
       this.logger.error('Error uploading file to supabase', error.message)
       throw error
     }
   }
 
-  async findAll() {
+  async findAll(meta: PaginationDto): Promise<PaginatedResponse<artist[]>> {
     try {
-      const response = await prisma.artist.findMany();
+      const { data, metaData } = await paginatedFindAll<artist>({
+        model: prisma.artist,
+        pageIndex: meta.pageIndex,
+        pageSize: meta.pageSize,
+      });
 
-      const artistsWithImageUrl = response.map((artist) => ({
+      const artistsWithImageUrl = data.map((artist) => ({
         ...artist,
         image_url: getDownloadUrl('artists_pp', artist.username + '_pp'),
       }));
 
-      return artistsWithImageUrl;
+      return { data: artistsWithImageUrl, metaData };
     } catch (error) {
       throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
     }

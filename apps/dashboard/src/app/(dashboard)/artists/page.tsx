@@ -1,21 +1,24 @@
-import { DataTable } from "@/components/Artists/data-table";
-import { columns } from "@/components/Artists/Columns";
+"use client"
+
 import { fetchArtists } from "@/services/ArtistsService";
+import { Artist } from "@/types/Artist";
+import { ApiResponse } from "@/lib/api-response";
 import { Suspense } from "react";
 import Loading from "./loading";
+import { DataTableComponent } from "@/components/ui/data-table/DataTableComponent";
+import { columns } from "@/components/Artists/Columns";
+import { VisibilityState } from "@tanstack/react-table";
+import { ArtistDialogCreate } from "@/components/Artists/DialogCreate";
 
-async function getData() {
-  const response = await fetchArtists();
-
-  if (response.status === "success") {
-    return response.data;
-  } else {
-    throw new Error(response.errorCode);
-  }
+async function fetchData(pageIndex: number, pageSize: number, filters?: string): Promise<ApiResponse<Artist[]>> {
+  return fetchArtists({ pageIndex, pageSize }, filters);
 }
 
 export default async function Artists() {
-  const data = await getData();
+  const columnsVisibility: VisibilityState = {
+    "created_at": false,
+    "id": false,
+  };
 
   return (
     <main className="">
@@ -23,9 +26,10 @@ export default async function Artists() {
         Artists
       </h2>
       <Suspense fallback={<Loading />}>
-        <DataTable columns={columns} data={data} />
+        <div className="">
+          <DataTableComponent<Artist> fetchData={fetchData} columns={columns} defaultVisibility={columnsVisibility} createButton={<ArtistDialogCreate />} />
+        </div>
       </Suspense>
-      {/* <DataTable columns={columns} data={data} /> */}
     </main>
   );
 }

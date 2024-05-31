@@ -30,7 +30,7 @@ function FormStepTwo({ form, previousStep, handleImageChange, previewUrl, fileRe
         render={() => {
           return (
             <FormItem>
-              <FormLabel>File</FormLabel>
+              <FormLabel>{i18n.t("CreateArtistModal.Picture")}</FormLabel>
               <FormControl>
                 <Input type="file" placeholder="shadcn" {...fileRef} onChange={handleImageChange} />
               </FormControl>

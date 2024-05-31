@@ -1,6 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UploadedFile, ParseFilePipeBuilder, ParseFilePipe, FileTypeValidator, MaxFileSizeValidator } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UploadedFile, ParseFilePipe, FileTypeValidator, MaxFileSizeValidator, Query, ParseIntPipe } from '@nestjs/common';
 import { ArtistsService } from './artists.service';
-import { CreateArtistDto } from './dto/create-artist.dto';
 import { UpdateArtistDto } from './dto/update-artist.dto';
 import { artist } from '@prisma/client'
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -37,8 +36,11 @@ export class ArtistsController {
 
   @Public()
   @Get()
-  findAll() {
-    return this.artistsService.findAll();
+  findAll(
+    @Query('page', new ParseIntPipe()) page: number,
+    @Query('size', new ParseIntPipe()) size: number,
+  ) {
+    return this.artistsService.findAll({ pageIndex: page, pageSize: size });
   }
 
   @Public()

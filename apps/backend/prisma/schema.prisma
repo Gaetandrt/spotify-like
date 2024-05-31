@@ -96,12 +96,13 @@ model artist {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model playlist {
-  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created_at  DateTime @default(now()) @db.Timestamptz(6)
-  title       String
-  description String?
-  image_id    String?  @default(dbgenerated("'9966fad2-bdbb-48a8-9ecc-1d4492e788bf'::uuid")) @db.Uuid
-  objects     objects? @relation(fields: [image_id], references: [id], onDelete: SetDefault)
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at    DateTime @default(now()) @db.Timestamptz(6)
+  name          String
+  description   String?
+  private       Boolean
+  collaborative Boolean
+  nb_tracks     Decimal? @db.Decimal
 
   @@schema("public")
 }
@@ -180,7 +181,6 @@ model objects {
   owner_id                      String?
   album                         album[]
   artist                        artist[]
-  playlist                      playlist[]
   track_track_image_idToobjects track[]         @relation("track_image_idToobjects")
   track_track_sourceToobjects   track[]         @relation("track_sourceToobjects")
   user_playlist                 user_playlist[]

@@ -3,10 +3,9 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Providers from "@/providers/Providers";
-import Modal from "@/components/modal/CreatePlaylist";
-import ProfilePopup from "@/components/navbar/ProfilePopup";
+import { Toaster } from "@/components/ui/sonner";
 
-const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
+const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,9 +23,9 @@ export default function RootLayout({
         <Providers>
           <Navbar>
             {children}
-            <Modal />
           </Navbar>
         </Providers>
+        <Toaster />
       </body>
     </html>
   );

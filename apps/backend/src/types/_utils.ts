@@ -4,8 +4,10 @@ export interface ApiResponse<T> {
     data?: T;
     errorCode?: string;
     details?: ErrorDetails;
+    metaData?: PaginationDto;
     path: string;
 }
+
 interface ErrorDetails {
     fields: Record<string, FieldError>;
 }
@@ -18,4 +20,20 @@ interface FieldError {
 export type AutcompleteData = {
     label: string,
     value: string
+}
+
+export class PaginationDto {
+    readonly pageIndex?: number
+    readonly totalItems?: number
+    readonly totalPages?: number
+    readonly pageSize?: number
+}
+
+export interface PaginatedResponse<T> {
+    data: T;
+    metaData: PaginationDto;
+}
+
+export interface Filters {
+    filters: string;
 }

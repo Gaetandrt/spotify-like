@@ -1,11 +1,8 @@
 "use client"
 
 import {
-  ColumnDef,
   flexRender,
-  getCoreRowModel,
-  useReactTable,
-  ColumnFiltersState, getFilteredRowModel
+  type Table as TanstackTable,
 } from "@tanstack/react-table"
 
 import {
@@ -16,45 +13,37 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { useState } from "react"
-import { Input } from "../ui/input"
-import { ArtistDialogCreate } from "./DialogCreate"
+import { DataTablePagination } from "./data-table-pagination"
+import { InputDebounce } from "../input-debounce"
+import { DropdownColumns } from "./components/DropdownColumns"
+import i18n from "@/translation/i18nInstance"
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  table: TanstackTable<TData>
+  floatingBar?: React.ReactNode | null
+  createButton?: React.ReactNode | null
 }
 
 export function DataTable<TData, TValue>({
-  columns,
-  data,
+  table,
+  floatingBar = null,
+  createButton = null,
 }: DataTableProps<TData, TValue>) {
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
-    []
-  )
-  const table = useReactTable({
-    onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    state: {
-      columnFilters,
-    },
-  })
-
   return (
-    <>
-      <div className="flex justify-between items-center py-4">
-        <Input
-          placeholder="Filter les noms..."
-          value={(table.getColumn("username")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("username")?.setFilterValue(event.target.value)
-          }
+    <div className="w-full space-y-2.5 overflow-auto p-2">
+      <div className="w-full flex justify-end">
+        <DropdownColumns<TData> table={table} />
+      </div>
+      <div className="flex flex-row justify-between">
+        <InputDebounce
+          placeholder={i18n.t("ArtistDataGrid.Search")}
+          onDebounce={(value) => table
+            .getColumn("username")
+            ?.setFilterValue(value)}
+          debounceDelay={300}
           className="max-w-sm"
         />
-        <ArtistDialogCreate />
+          {createButton}
       </div>
       <div className="rounded-md border">
         <Table>
@@ -92,7 +81,7 @@ export function DataTable<TData, TValue>({
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell colSpan={table.getRowCount()} className="h-24 text-center">
                   No results.
                 </TableCell>
               </TableRow>
@@ -100,6 +89,10 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-    </>
+      <div className="flex flex-col gap-2.5">
+        <DataTablePagination table={table} />
+        {table.getFilteredSelectedRowModel().rows.length > 0 && floatingBar}
+      </div>
+    </div>
   )
 }

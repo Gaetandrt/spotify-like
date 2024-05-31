@@ -3,7 +3,8 @@ import { formSchema } from "@/components/Artists/Form/FormSchema";
 import axiosAPI, { fetcher } from "@/lib/axios";
 import { z } from "zod";
 import { AutocompleteData } from "@/types/Utils";
-import { ApiResponse, UploadData } from "@/lib/api-response";
+import { ApiResponse, Metadata, UploadData } from "@/lib/api-response";
+import { ColumnFiltersState } from "@tanstack/react-table";
 
 export async function uploadArtistImage(file: File, filename: string): Promise<ApiResponse<UploadData>> {
   try {
@@ -11,14 +12,15 @@ export async function uploadArtistImage(file: File, filename: string): Promise<A
     formData.append("file", file);
     formData.append("filename", filename);
 
-    const response = await fetcher<UploadData>("/artists/upload", "post", formData, {
+    const response = await fetcher<UploadData>("/artists/upload", "post", {
+      data: formData,
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
 
 
-    if (response.status === "error" )
+    if (response.status === "error")
       throw new Error("Error uploading image")
 
     return response;
@@ -31,11 +33,13 @@ export async function createNewArtist(values: z.infer<typeof formSchema>, image:
   try {
     console.log(image)
     const response = await fetcher<Artist>("/artists", "post", {
-      username: values.username,
-      first_name: values.firstname,
-      last_name: values.lastname,
-      email: values.email,
-      image_id: image,
+      data: {
+        username: values.username,
+        first_name: values.firstname,
+        last_name: values.lastname,
+        email: values.email,
+        image_id: image,
+      }
     });
 
     return response;
@@ -45,10 +49,15 @@ export async function createNewArtist(values: z.infer<typeof formSchema>, image:
   }
 }
 
-export async function fetchArtists(): Promise<ApiResponse<Artist[]>> {
+export async function fetchArtists(metaData: Metadata, filters?: string): Promise<ApiResponse<Artist[]>> {
   try {
-    const response = await fetcher<Artist[]>("/artists", "get");
-
+    const response = await fetcher<Artist[]>("/artists", "get", {
+      params: {
+        page: metaData.pageIndex,
+        size: metaData.pageSize
+      },
+    });
+    console.log(response)
     return response;
   } catch (error) {
     throw error;

@@ -15,7 +15,8 @@ function ProfilePopup({}: Props) {
         <div className="flex items-center ease-in-out transition p-4 rounded-t-xl hover:bg-[#3A393D]">
           <div className="flex-none w-1/4">
             <Image
-              src={session?.user?.image}
+              alt="user"
+              src={String(session?.user?.image)}
               width={50}
               height={50}
               className="rounded-full"

@@ -28,7 +28,6 @@ export function TrackDialogEdit({ track }: TrackDialogEditProps) {
         <DialogHeader>
           <DialogTitle>Edit track</DialogTitle>
           <DialogDescription>
-            You can edit the track here. Click submit when you're done.
           </DialogDescription>
         </DialogHeader>
         <TrackForm editTrack={track} />

@@ -16,6 +16,9 @@ import { ArtistsModule } from './routes/artists/artists.module';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { PrismaClientExceptionFilter } from './filters/http-exception.filter';
 import { TransformInterceptor } from './filters/http-transform.filter';
+import { PlaylistModule } from './routes/playlist/playlist.module';
+import { PlaylistService } from './routes/playlist/playlist.service';
+import { PlaylistController } from './routes/playlist/playlist.controller';
 
 @Module({
   imports: [
@@ -33,6 +36,7 @@ import { TransformInterceptor } from './filters/http-transform.filter';
     AuthModule,
     PassportModule,
     ArtistsModule,
+    PlaylistModule,
     JwtModule.register({
       global: true,
     }),
@@ -40,12 +44,13 @@ import { TransformInterceptor } from './filters/http-transform.filter';
     PrismaSupabaseModule,
   ],
 
-  controllers: [AppController, ArtistsController],
+  controllers: [AppController, ArtistsController, PlaylistController],
   providers: [
     AppService,
     GoogleStrategy,
     JwtStrategy,
     ArtistsService,
+    PlaylistService,
     {
       provide: APP_INTERCEPTOR,
       useClass: TransformInterceptor,

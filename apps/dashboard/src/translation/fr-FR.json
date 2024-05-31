@@ -9,6 +9,7 @@
       "firstname": "Prénom",
       "lastname": "Nom",
       "email": "Email",
+      "Picture": "Image",
       "UsernameZodMin": "Le nom d'utilisateur doit faire minimum 2 caractères.",
       "UsernameZodMax": "Le nom d'utilisateur doit faire maximum 20 caractères.",
       "firstnameZodMin": "Le prénom doit faire minimum 2 caractères.",
@@ -30,6 +31,7 @@
       "ArtistSuccess": "Artiste créé avec succès !"
     },
     "ArtistDataGrid" : {
+      "Search": "Rechercher par nom d'utilisateur",
       "Artist": "Artiste",
       "Username": "Nom d'utilisateur",
       "Firstname": "Prénom",
@@ -40,12 +42,23 @@
       "Delete": "Supprimer",
       "NoArtists": "Aucun artiste trouvé.",
       "Picture": "Image",
-      "CreatedAt": "Créé le"
+      "CreatedAt": "Créé le",
+      "ActionsButton": "Ouvrir les actions"
+    },
+    "DataGrid": {
+      "ColumnsVisibility": "Visibilité des colonnes"
+    },
+    "DeleteArtistModal": {
+      "DeleteArtist": "Supprimer l'artiste",
+      "DeleteArtistDescr": "Êtes-vous sûr de vouloir supprimer cet artiste ?",
+      "DeleteArtistSuccess": "Artiste supprimé avec succès !"
     },
     "Next": "Suivant",
     "Submit": "Terminer",
     "Previous": "Précedent",
     "Edit": "Modifier",
-    "Delete": "Supprimer"
+    "Delete": "Supprimer",
+    "Confirm": "Confirmer",
+    "Cancel": "Annuler"
   }
 }

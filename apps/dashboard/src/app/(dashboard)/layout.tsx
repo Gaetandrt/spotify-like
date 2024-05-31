@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "../globals.css";
 import { Toaster } from "@/components/ui/toaster"
 import LayoutBar from "@/components/Bar/LayoutBar";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const poppins = Poppins({ weight: ["200", "300", "400", "500", "600", "700", "800", "900"], subsets: ["latin"] });
 
@@ -19,8 +20,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <LayoutBar>{children}</LayoutBar>
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <LayoutBar>{children}</LayoutBar>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

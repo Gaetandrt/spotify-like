@@ -91,7 +91,9 @@ export function ArtistForm({ setOpen, editArtist }: ProfileFormProps) {
       return;
     }
 
-    const data = await createNewArtist(values, response.data.id);
+    console.log(response)
+
+    const data = await createNewArtist(values, response.data.path);
 
     if (data.status === "error") {
       handleFormError(data, form, setActiveStep);

@@ -19,7 +19,7 @@ function SearchInput({}: Props) {
         style={{ paddingLeft: '50px' }}
       />
       <CiSearch
-        style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)' }}
+        style={{ position: 'absolute', left: '10px', top: '45%', transform: 'translateY(-50%)' }}
         size={28}
       />
     </div>

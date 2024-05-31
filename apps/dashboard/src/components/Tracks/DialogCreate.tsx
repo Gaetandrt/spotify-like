@@ -22,7 +22,6 @@ export function TrackDialogCreate() {
         <DialogHeader>
           <DialogTitle>New track</DialogTitle>
           <DialogDescription>
-            You can create a new track here. Click submit when you're done.
           </DialogDescription>
         </DialogHeader>
         <TrackForm />
